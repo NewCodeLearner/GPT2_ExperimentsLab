@@ -4,6 +4,9 @@
 - This project explores the conversion of GPT-2 weights into a 1.58-bit or BitNet representation using an absmean quantization approach.
 - The aim is to test the model's evaluation performance post-quantization while drastically reducing the memory footprint and computational overhead.
 
+## The motivation for this project comes from this paper.
+The Era of 1-bit LLMs: All Large Language Models are in 1.58 Bits https://arxiv.org/pdf/2402.17764
+
 ## What Makes This Idea Interesting
 - **Efficiency Gains**: Reducing model weights to 1.58-bit representation enables significant reductions in storage and memory consumption, making it feasible to deploy large language models on resource-constrained devices.
 - **Preserving Performance**: Testing the trade-off between the compressed model size and its ability to retain evaluation accuracy sheds light on robust quantization techniques.
