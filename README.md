@@ -30,3 +30,40 @@ Using a controlled subset (or multiple runs) to fine-tune and monitor performanc
 
 5. Re‐evaluate the model performance on the spam data.
 Compare the performance against the GPT2 baseline, and also assess any trade-offs in inference speed, memory usage, and overall robustness.
+
+
+Below is a suggested summary you can add as a **"Learnings & Observations"** section in your README or as a separate markdown file (e.g., `LEARNINGS.md`). You can modify it as needed.
+
+---
+
+## Learnings & Observations
+
+### Pre-Fine-Tuning Stage
+
+- **Successful Quantization:**  
+  - We implemented a ternary quantization technique using an absmean approach to convert the GPT-2 model’s linear layer weights to a 1.58-bit (ternary) representation.  
+  - By inspecting the state dictionary (e.g., `trf_blocks.X...weight`), we confirmed that weights are now only in the set {-1, 0, 1}.
+
+- **Baseline Evaluation Before Fine-Tuning:**  
+  - The pre-trained full-precision GPT-2 model, when applied to our spam classification task without additional fine-tuning, exhibits low baseline accuracy (e.g., training: ~46.25%, test: ~40.00%).
+  - After quantizing the linear layers, the model’s accuracy remained nearly the same (≈46.25%).  
+  - **Interpretation:**  
+    This indicates that simply replacing weights with ternary values does not significantly change the model’s unspecialized behavior on the classification task. In other words, the quantization process has successfully reduced precision without further improving (or worsening) the baseline accuracy.
+
+- **Implications for Fine-Tuning:**  
+  - The similar baseline performance suggests that the ternary conversion has preserved the core model representations, but like the original pre-trained model, it isn’t directly aligned with the classification objective.
+  - Fine-tuning is expected to help the model adapt its representations to the task at hand. When we fine-tune—focusing, for example, on the last few transformer layers along with the classification head—we anticipate that the quantized model will be able to recover, or possibly even exceed, the baseline performance.
+
+### Next Steps
+
+- **Fine-Tuning on Classification Data:**  
+  We plan to fine-tune the quantized model on our spam classification dataset. The approach will be to:
+  - Unfreeze the last two transformer layers, final layer normalization, and the classification head.
+  - Monitor improvements in accuracy, loss, and other relevant performance metrics.
+  - Compare the recovery performance of the quantized model versus the full-precision baseline after task-specific training.
+
+- **Performance Evaluation:**  
+  - We will log and visualize the metrics (using tools like TensorBoard) to see how the fine-tuning process impacts both the model’s accuracy and efficiency.
+  - This will help us understand the tradeoffs between the decreased precision and the computational efficiency gains achieved via quantization.
+
+---
