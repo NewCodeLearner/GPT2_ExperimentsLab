@@ -67,3 +67,37 @@ Below is a suggested summary you can add as a **"Learnings & Observations"** sec
   - This will help us understand the tradeoffs between the decreased precision and the computational efficiency gains achieved via quantization.
 
 ---
+
+Here’s how you could structure your findings to add below the "Learnings & Observations" section in your README:
+
+---
+
+## Results & Performance Evaluation
+
+### Fine-Tuning Results
+After fine-tuning the quantized GPT-2 model on the classification dataset, the results demonstrate a significant recovery in performance compared to the pre-fine-tuning baseline:
+
+- **Training Accuracy**: 99.04%  
+- **Test Accuracy**: 96.43%  
+
+These results indicate that the quantized model, despite its reduced precision (ternary weights: {-1, 0, +1}), is capable of achieving near-perfect accuracy on the training set while maintaining excellent generalization to unseen test data.
+
+### Key Observations
+1. **Recovery After Quantization**:  
+   - Prior to fine-tuning, the quantized model exhibited similar performance to the full-precision model (~46.25% accuracy).  
+   - Fine-tuning allowed the quantized model to recover its ability to learn task-specific representations and significantly outperform the baseline.
+
+2. **Generalization Ability**:  
+   - The close alignment between training accuracy (99.04%) and test accuracy (96.43%) demonstrates minimal overfitting, suggesting that the model adapts effectively to the classification dataset.
+
+3. **Implications for Efficiency**:  
+   - With the quantized model achieving comparable or superior accuracy to the full-precision version, the benefits of reduced precision—such as lower memory consumption and potential improvements in inference speed—can be leveraged without sacrificing task performance.
+
+---
+
+### Next Steps
+- **Efficiency Analysis**: Conduct experiments to measure inference speed and memory usage of the quantized model compared to the full-precision counterpart.
+- **Further Experiments**: Explore additional quantization strategies and investigate their impact on training dynamics and accuracy recovery.
+- **Robustness Testing**: Validate the model on different datasets and tasks to assess its versatility and robustness post-quantization.
+
+---
