@@ -68,8 +68,6 @@ Below is a suggested summary you can add as a **"Learnings & Observations"** sec
 
 ---
 
-Here’s how you could structure your findings to add below the "Learnings & Observations" section in your README:
-
 ---
 
 ## Results & Performance Evaluation
